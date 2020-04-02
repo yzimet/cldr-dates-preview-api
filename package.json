@@ -1,0 +1,15 @@
+{
+  "name": "cldr-dates-preview-api",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Yaniv Zimet",
+  "repository": "yzimet/cldr-dates-preview-api",
+  "homepage": "https://github.com/yzimet/cldr-dates-preview-api#readme",
+  "license": "MIT",
+  "dependencies": {
+    "cldr-data": "^36.0.0",
+    "express": "^4.17.1",
+    "globalize": "^1.4.2",
+    "iana-tz-data": "^2019.1.0"
+  }
+}
