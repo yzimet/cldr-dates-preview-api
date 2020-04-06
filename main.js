@@ -3,6 +3,7 @@ const url = require("url");
 const express = require("express");
 const Globalize = require("globalize");
 const cldrDataAll = require("cldr-data").all();
+const scriptMetadata = require("cldr-data/scriptMetadata");
 
 const PORT = 3001;
 const dateFormats = [
@@ -86,6 +87,7 @@ app.use(express.json()); // for parsing application/json
 app.get("/api/locales/:locale", (req, res) => {
   const locale = req.params.locale || "en";
   const globalizeInstance = new Globalize(locale);
+  const script = globalizeInstance.cldr.attributes.script;
 
   // has a date been specified?
   let date;
@@ -97,7 +99,8 @@ app.get("/api/locales/:locale", (req, res) => {
 
   res.send({
     metadata: {
-      locale: locale
+      locale: locale,
+      rtl: scriptMetadata.scriptMetadata[script].rtl === "YES"
     },
     dateFormats: dateFormats.map(({ name, path, globalizeParams }) => ({
       name,
