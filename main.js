@@ -4,6 +4,7 @@ const express = require("express");
 const Globalize = require("globalize");
 const cldrDataAll = require("cldr-data").all();
 const scriptMetadata = require("cldr-data/scriptMetadata");
+const { availableLocales } = require("cldr-data/availableLocales");
 
 const PORT = 3001;
 const dateFormats = [
@@ -139,6 +140,13 @@ app.get("/api/locales/:locale", (req, res) => {
         errorMessage
       };
     })
+  });
+});
+
+app.get("/api/locales", (req, res) => {
+  res.send({
+    metadata: {},
+    availableLocales
   });
 });
 
