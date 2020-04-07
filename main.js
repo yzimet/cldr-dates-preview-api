@@ -5,7 +5,9 @@ const Globalize = require("globalize");
 const cldrDataAll = require("cldr-data").all();
 const scriptMetadata = require("cldr-data/scriptMetadata");
 const { availableLocales } = require("cldr-data/availableLocales");
+// https://github.com/tc39/proposal-intl-displaynames
 
+const DEFAULT_LOCALE = "en";
 const PORT = 3001;
 const dateFormats = [
   {
@@ -86,7 +88,7 @@ const app = express();
 app.use(express.json()); // for parsing application/json
 
 app.get("/api/locales/:locale", (req, res) => {
-  const locale = req.params.locale || "en";
+  const locale = req.params.locale || DEFAULT_LOCALE;
   const globalizeInstance = new Globalize(locale);
   const script = globalizeInstance.cldr.attributes.script;
 
@@ -144,9 +146,14 @@ app.get("/api/locales/:locale", (req, res) => {
 });
 
 app.get("/api/locales", (req, res) => {
+  const en = new Globalize(DEFAULT_LOCALE);
+  const languageNames = en.cldr.main("localeDisplayNames/languages");
   res.send({
     metadata: {},
-    availableLocales
+    availableLocales: availableLocales.map(locale => ({
+      locale,
+      name: languageNames[locale]
+    }))
   });
 });
 
