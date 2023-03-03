@@ -7,7 +7,7 @@
   "homepage": "https://github.com/yzimet/cldr-dates-preview-api#readme",
   "license": "MIT",
   "dependencies": {
-    "cldr-data": "^36.0.0",
+    "cldr-data": "^36.0.1",
     "express": "^4.17.1",
     "globalize": "^1.4.2",
     "iana-tz-data": "^2019.1.0"
